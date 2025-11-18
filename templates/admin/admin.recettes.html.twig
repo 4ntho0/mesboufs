@@ -1,0 +1,50 @@
+{% extends "baseadmin.html.twig" %}
+
+{% block body %}
+                    
+    <p class="text-end">
+        <a href="#" class="btn btn-primary">
+            Ajouter une nouvelle recette
+        </a>
+    </p>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    Nom
+                </th>
+                <th>
+                    Note
+                </th>
+                <th>
+                    Date
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for repa in repas %}
+                <tr>
+                    <td>
+                        <h5 class="text-primary">
+                            {{ repa.nom }}
+                        </h5>
+                    </td>
+                    <td>
+                        {{ repa.note }}
+                    </td>
+                    <td>
+                        {{ repa.datecreationstring }}
+                    </td>
+                    <td>
+                        <a href="#" class="btn btn-secondary">Editer</a>
+                        <a href="{{ path('admin.recette.suppr', {'id': repa.id}) }}" class="btn btn-danger" onclick="return confirm('Etes-vous sûr de vouloir supprimer la recette {{repa.nom}} ?')">Supprimer</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+            
+{% endblock %}

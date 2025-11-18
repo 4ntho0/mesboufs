@@ -1,0 +1,28 @@
+{% extends "basefront.html.twig" %}
+
+{% block body %}
+     <div class="row mt-3">
+        <div class="col">
+            <h5> {{ repa.catégorie }}</h5>
+            <h5> {{ repa.datecreationstring }}</h5>
+            <h1 class="text-primary mt-5">{{ repa.nom }}</h1>
+            <h3>{{ repa.duree }} min</h3>
+            {% if repa.note>=10 %}
+                <h2 class="text-success mt-5">{{ repa.note }}/20</h2>
+            {% else %}
+                <h2 class="text-danger mt-5">{{ repa.note }}/20</h2>
+            {% endif %}                 
+        </div>
+        <div>
+            <!-- emplacement photo -->       
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col md-12">
+            <p><strong>Instruction :</strong></p>
+            <p>
+                {{ repa.instruction }}
+            </p>
+        </div>
+    </div>
+{% endblock %}
