@@ -1,0 +1,23 @@
+{{ form_start(formrepa) }}
+<div class="row">
+    <div class="col">
+        {{ form_row(formrepa.nom) }}
+        <div class="row">
+            <div class="col-auto">
+                {{ form_row(formrepa.datecreation) }}
+            </div>
+            <div class="col">
+                {{ form_row(formrepa.note) }}
+            </div>
+            <div class="col">
+                {{ form_row(formrepa.duree) }}
+            </div>
+        </div>
+    </div>              
+</div>
+<div class="row">
+    <div class="col">  
+        {{ form_row(formrepa.instruction) }}
+    </div>              
+</div>
+{{ form_end(formrepa) }}

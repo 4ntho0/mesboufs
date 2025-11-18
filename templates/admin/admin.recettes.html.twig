@@ -3,7 +3,7 @@
 {% block body %}
                     
     <p class="text-end">
-        <a href="#" class="btn btn-primary">
+        <a href="{{ path('admin.recette.ajout') }}" class="btn btn-primary">
             Ajouter une nouvelle recette
         </a>
     </p>
@@ -39,7 +39,7 @@
                         {{ repa.datecreationstring }}
                     </td>
                     <td>
-                        <a href="#" class="btn btn-secondary">Editer</a>
+                        <a href="{{ path('admin.recette.edit', {'id': repa.id}) }}" class="btn btn-secondary">Editer</a>
                         <a href="{{ path('admin.recette.suppr', {'id': repa.id}) }}" class="btn btn-danger" onclick="return confirm('Etes-vous sûr de vouloir supprimer la recette {{repa.nom}} ?')">Supprimer</a>
                     </td>
                 </tr>
