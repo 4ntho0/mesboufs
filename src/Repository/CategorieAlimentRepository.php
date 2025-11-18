@@ -16,28 +16,42 @@ class CategorieAlimentRepository extends ServiceEntityRepository
         parent::__construct($registry, CategorieAliment::class);
     }
 
-    //    /**
-    //     * @return CategorieAliment[] Returns an array of CategorieAliment objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('c')
-    //            ->andWhere('c.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('c.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+     /**
+     * Supprime une catégorie d'aliment
+     * @param CategorieAliment $categoriAliment
+     * @return void
+     */
+    public function remove(CategorieAliment $categoriAliment): void
+    {
+        $this->getEntityManager()->remove($categoriAliment);
+        $this->getEntityManager()->flush();
+    }    
 
-    //    public function findOneBySomeField($value): ?CategorieAliment
-    //    {
-    //        return $this->createQueryBuilder('c')
-    //            ->andWhere('c.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    /**
+     * Ajoute un environnement
+     * @param CategorieAliment $categoriAliment
+     * @return void
+     */
+    public function add(CategorieAliment $categoriAliment): void
+    {
+        $this->getEntityManager()->persist($categoriAliment);
+        $this->getEntityManager()->flush();
+    }
+    
+    /**
+ * Retourne la liste des catégories de repas d'une playlist
+ * @param int $idPlaylist
+ * @return CategorieRepa[]
+ */
+public function findAllForOnePlaylist(int $idPlaylist): array
+{
+    return $this->createQueryBuilder('c')
+        ->join('c.formations', 'f')   // 'formations' doit être la relation dans CategorieRepa
+        ->join('f.playlist', 'p')
+        ->where('p.id = :id')
+        ->setParameter('id', $idPlaylist)
+        ->orderBy('c.nom', 'ASC')
+        ->getQuery()
+        ->getResult();
+}
 }

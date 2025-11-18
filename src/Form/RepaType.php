@@ -2,12 +2,12 @@
 
 namespace App\Form;
 
-use App\Entity\Repa;    
+use App\Entity\CategorieRepa;
+use App\Entity\Repa;
 use DateTime;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -31,6 +31,12 @@ class RepaType extends AbstractType
             
             ->add('duree', null,[
                 'label' => 'Durée (en min) : '
+            ])
+            ->add('categories', EntityType::class, [
+                'class' => CategorieRepa::class,
+                'choice_label' => 'nom',
+                'multiple' => true,
+                'required' => false
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Enregister'

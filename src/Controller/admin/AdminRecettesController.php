@@ -41,6 +41,14 @@ class AdminRecettesController extends AbstractController{
         ]);
     }  
     
+    #[Route('/admin/recettes/tri/{champ}/{ordre}', name: 'admin.recettes.sort')]
+    public function sort($champ, $ordre): Response{
+        $repas = $this->repository->findAllOrderBy($champ, $ordre);
+        return $this->render("admin/admin.recettes.html.twig", [
+            'repas' => $repas
+        ]);
+    }
+    
       #[Route('/admin/suppr/{id}', name: 'admin.recette.suppr')]
     public function suppr(int $id): Response{
         $repa = $this->repository->find($id);

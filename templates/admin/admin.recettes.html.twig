@@ -10,14 +10,18 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>
+                <th class="text-left align-top" scope="col">
                     Nom
+                    <a href="{{ path('admin.recettes.sort', {champ:'nom', ordre:'ASC'}) }}" class="btn btn-primary btn-sm active" role="button" aria-pressed="true"><</a>
+                    <a href="{{ path('admin.recettes.sort', {champ:'nom', ordre:'DESC'}) }}" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">></a>
                 </th>
-                <th>
+                <th class="text-left align-top" scope="col">
                     Note
                 </th>
-                <th>
-                    Date
+                <th class="text-left align-top" scope="col">
+                    Recette
+                    <a href="{{ path('admin.recettes.sort', {champ:'datecreation', ordre:'ASC'}) }}" class="btn btn-primary btn-sm active" role="button" aria-pressed="true"><</a>
+                    <a href="{{ path('admin.recettes.sort', {champ:'datecreation', ordre:'DESC'}) }}" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">></a>
                 </th>
                 <th>
                     Actions

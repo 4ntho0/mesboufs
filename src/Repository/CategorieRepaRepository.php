@@ -16,28 +16,25 @@ class CategorieRepaRepository extends ServiceEntityRepository
         parent::__construct($registry, CategorieRepa::class);
     }
 
-    //    /**
-    //     * @return CategorieRepa[] Returns an array of CategorieRepa objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('c')
-    //            ->andWhere('c.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('c.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+     /**
+     * Supprime une catégorie de repa
+     * @param CategorieRepa $categorieRepa
+     * @return void
+     */
+    public function remove(CategorieRepa $categorieRepa): void
+    {
+        $this->getEntityManager()->remove($categorieRepa);
+        $this->getEntityManager()->flush();
+    }    
 
-    //    public function findOneBySomeField($value): ?CategorieRepa
-    //    {
-    //        return $this->createQueryBuilder('c')
-    //            ->andWhere('c.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    /**
+     * Ajoute un environnement
+     * @param CategorieRepa $categorieRepa
+     * @return void
+     */
+    public function add(CategorieRepa $categorieRepa): void
+    {
+        $this->getEntityManager()->persist($categorieRepa);
+        $this->getEntityManager()->flush();
+    }
 }

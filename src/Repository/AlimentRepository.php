@@ -16,28 +16,25 @@ class AlimentRepository extends ServiceEntityRepository
         parent::__construct($registry, Aliment::class);
     }
 
-    //    /**
-    //     * @return Aliment[] Returns an array of Aliment objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('a')
-    //            ->andWhere('a.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('a.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    /**
+     * Supprime un aliment
+     * @param Aliment $aliment
+     * @return void
+     */
+    public function remove(Aliment $aliment): void
+    {
+        $this->getEntityManager()->remove($aliment);
+        $this->getEntityManager()->flush();
+    }    
 
-    //    public function findOneBySomeField($value): ?Aliment
-    //    {
-    //        return $this->createQueryBuilder('a')
-    //            ->andWhere('a.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    /**
+     * Ajoute un aliment
+     * @param Aliment $aliment
+     * @return void
+     */
+    public function add(Aliment $aliment): void
+    {
+        $this->getEntityManager()->persist($aliment);
+        $this->getEntityManager()->flush();
+    }
 }
