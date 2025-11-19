@@ -1,71 +1,55 @@
 {% extends "baseadmin.html.twig" %}
 
 {% block body %}
+    <h5 class="card-title mb-3">Ajouter un aliment :</h5></br>
 
-    <div class="card mt-3 shadow-sm">
-        <div class="card-body">
-            <h5 class="card-title mb-3">Ajouter un aliment</h5>
 
-            <form class="form-inline d-flex align-items-center" method="POST" action="{{ path('admin.aliment.ajout') }}">
-                <input 
-                    type="text" 
-                    class="form-control form-control-sm me-2" 
-                    name="nom" 
-                    placeholder="Nom de l'aliment" 
-                    required
-                >
+    {{ form_start(formAliment) }}
 
-                <select 
-                    class="form-select form-select-sm me-2" 
-                    name="type" 
-                    required
-                >
-                    <option value="">-- Type --</option>
-                    <option value="legume">Légume</option>
-                    <option value="viande">Viande</option>
-                    <option value="fromage">Fromage</option>
-                    <option value="feculent">Féculent</option>
-                    <option value="epice">Épice</option>
-                    
-                    <option value="autre">Autre</option>
-                </select>
-
-                <button type="submit" class="btn btn-primary btn-sm">Ajouter</button>
-            </form>
+    <div class="row align-items-end mb-3">
+        <div class="col">
+            {{ form_row(formAliment.nom) }}
         </div>
-    </div>  
-     <div class="row mt-4">
-        {% set types = ['legume','viande','fromage','feculent','epice','autre'] %}
-        
-        {% for type in types %}
-            <div class="col-md">
-                <div class="card shadow-sm mb-3">
-                    <div class="card-header text-center fw-bold text-capitalize">
-                        {{ type }}
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        {% set aliments_du_type = aliments|filter(a => a.type == type) %}
+        <div class="col">
+            {{ form_row(formAliment.unite) }}
+        </div>
+        <div class="col">
+            {{ form_row(formAliment.categorie) }}
+        </div>
 
-                        {% if aliments_du_type is not empty %}
-                            {% for aliment in aliments_du_type %}
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    {{ aliment.nom }}
-                                    <a href="{{ path('admin.aliment.suppr', {id: aliment.id}) }}" 
-                                       class="btn btn-danger btn-sm"
-                                       onclick="return confirm('Supprimer {{ aliment.nom }} ?')">
-                                        ×
-                                    </a>
-                                </li>
-                            {% endfor %}
-                        {% else %}
-                            <li class="list-group-item text-muted text-center fst-italic">
-                                Aucun
-                            </li>
-                        {% endif %}
-                    </ul>
-                </div>
-            </div>
-        {% endfor %}
     </div>
-    
+    <button class="btn btn-success w-100">Ajouter</button>
+
+    {{ form_end(formAliment) }}
+
+    <hr>
+
+    <h5 class="card-title mb-3">Liste des aliments :</h5>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Unité</th>
+                <th>Catégorie</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for aliment in aliments %}
+                <tr>
+                    <td>{{ aliment.nom }}</td>
+                    <td>{{ aliment.unite }}</td>
+                    <td>{{ aliment.categorie.nom }}</td>
+                    <td>
+                        <a 
+                            href="{{ path('admin.aliment.suppr', {id: aliment.id}) }}"
+                            class="btn btn-danger btn-sm"
+                            >Supprimer</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
 {% endblock %}
